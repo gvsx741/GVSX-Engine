@@ -18,4 +18,5 @@ add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 add_subdirectory(thirdparty/glfw)
 add_subdirectory(thirdparty/glm)
 
+target_link_libraries(${PROJECT_NAME} PRIVATE d3d11)
 target_link_libraries(${PROJECT_NAME} PUBLIC glfw glm)
