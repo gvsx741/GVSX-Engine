@@ -1,10 +1,9 @@
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
+#include <app.h>
 
-#include <d3d11.h>
-#pragma lib(lib, "d3d11.lib")
+using namespace gvsx;
 
 int main()
 {
-	return 0;
+	cApp app;
+	app.run();
 }
