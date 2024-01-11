@@ -13,10 +13,12 @@ include_directories(
 		thridparty/glm/glm
 		)
 		
-add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+add_executable(gvsx-engine ${SOURCE_FILES})
+
+#add_library(gvsx-engine SHARED ${SOURCE_FILES})
 
 add_subdirectory(thirdparty/glfw)
 add_subdirectory(thirdparty/glm)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE d3d11)
-target_link_libraries(${PROJECT_NAME} PUBLIC glfw glm)
+target_link_libraries(gvsx-engine PRIVATE d3d11)
+target_link_libraries(gvsx-engine PUBLIC glfw glm)

@@ -5,5 +5,7 @@ using namespace gvsx;
 int main()
 {
 	cApp app;
-	app.run();
+
+	app.Init();
+	app.Run();
 }

@@ -1,11 +1,17 @@
+#include <window/window_manager.h>
 
 namespace gvsx {
 
 	class cApp 
 	{
 	public:
+		void Init();
+		void Free();
 
-		void run();
+		void Run();
+		
+	private:
+		GLFWwindow* window;
 	};
 
 }

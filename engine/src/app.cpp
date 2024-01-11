@@ -1,12 +1,32 @@
 #include <app.h>
+#include <iostream>
 
 namespace gvsx {
 
-	void cApp::run()
+	void cApp::Init()
 	{
-		while (true) {
+		cWindowManager::Init();
+	}
 
+	void cApp::Free()
+	{
+		cWindowManager::Free();
+	}
+
+	void cApp::Run()
+	{
+
+		window = cWindowManager::Create(640, 640, "GVSX_WINDOW");
+
+		cWindowManager::MakeCurrent(window);
+		
+		while(!cWindowManager::CheckClosed(window))
+		{
+			cWindowManager::SwapBuffer(window);
+			cWindowManager::CheckEvents();
 		}
+
+		cWindowManager::Destroy(window);
 	}
 
 }
