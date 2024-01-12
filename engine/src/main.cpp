@@ -7,6 +7,6 @@ int main()
 	cApp app;
 
 	app.Init();
-
 	app.Run();
+	app.Free();
 }

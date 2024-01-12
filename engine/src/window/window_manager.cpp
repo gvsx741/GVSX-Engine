@@ -2,62 +2,64 @@
 
 namespace gvsx {
 
-	GLFWwindow* cWindowManager::m_Window = nullptr;
+	namespace window {
 
-	void cWindowManager::Init()
-	{
-		if (!glfwInit()) {
-			std::cout << "GLFW is not init" << std::endl;
-		}
-	}
+		GLFWwindow* cWindowManager::m_Window = nullptr;
 
-	void cWindowManager::Free()
-	{
-		glfwTerminate();
-	}
-
-	void cWindowManager::Create(int width, int height, const char* title)
-	{
-		m_Window = glfwCreateWindow(width, height, title, NULL, NULL);
-		
-		if (!m_Window)
+		void cWindowManager::Init()
 		{
-			std::cout << "Window is not created" << std::endl;
+			if (!glfwInit()) {
+				std::cout << "GLFW is not init" << std::endl;
+			}
 		}
-	}
 
-	void cWindowManager::Destroy(GLFWwindow* window)
-	{
-		glfwDestroyWindow(window);
-	}
+		void cWindowManager::Free()
+		{
+			glfwTerminate();
+		}
 
-	void cWindowManager::MakeCurrent(GLFWwindow* window)
-	{
-		glfwMakeContextCurrent(window);
-	}
+		void cWindowManager::InitWindow(sWindowDescription desc)
+		{
+			m_Window = glfwCreateWindow(desc.Width, desc.Height, desc.Title, NULL, NULL);
 
-	void cWindowManager::CheckEvents()
-	{
-		glfwPollEvents();
-	}
+			if (!m_Window)
+			{
+				std::cout << "Window is not created" << std::endl;
+			}
 
-	void cWindowManager::SwapBuffer(GLFWwindow* window)
-	{
-		glfwSwapBuffers(window);
-	}
+			glfwMakeContextCurrent(m_Window);
+		}
 
-	GLFWwindow* cWindowManager::GetWindow()
-	{
-		return m_Window;
-	}
+		void cWindowManager::FreeWindow()
+		{
+			if (m_Window != nullptr) {
+				glfwDestroyWindow(m_Window);
+			}
+		}
 
-	void* cWindowManager::GetWindow32()
-	{
-		return glfwGetWin32Window(m_Window);
-	}
+		void cWindowManager::CheckEvents()
+		{
+			glfwPollEvents();
+		}
 
-	bool cWindowManager::CheckClosed()
-	{
-		return glfwWindowShouldClose(m_Window);
+		void cWindowManager::SwapBuffers()
+		{
+			glfwSwapBuffers(m_Window);
+		}
+
+		GLFWwindow* cWindowManager::GetWindow()
+		{
+			return m_Window;
+		}
+
+		void* cWindowManager::GetWin32Window()
+		{
+			return glfwGetWin32Window(m_Window);
+		}
+
+		bool cWindowManager::CheckClosed()
+		{
+			return glfwWindowShouldClose(m_Window);
+		}
 	}
 };

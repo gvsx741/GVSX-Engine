@@ -5,13 +5,12 @@
 namespace gvsx {
 
 	//using namespace render;
+	using namespace window;
 
 	void cApp::Init()
 	{
 		cWindowManager::Init();
-		cWindowManager::Create(640, 640, "GVSX_WINDOW");
-		cWindowManager::MakeCurrent(cWindowManager::GetWindow());
-
+		cWindowManager::InitWindow(sWindowDescription());
 	}
 
 	void cApp::Free()
@@ -23,11 +22,9 @@ namespace gvsx {
 	{
 		while(!cWindowManager::CheckClosed())
 		{
-			cWindowManager::SwapBuffer(cWindowManager::GetWindow());
+			cWindowManager::SwapBuffers();
 			cWindowManager::CheckEvents();
 		}
-
-		cWindowManager::Destroy(cWindowManager::GetWindow());
 	}
 
 }

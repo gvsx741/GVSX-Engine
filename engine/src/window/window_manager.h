@@ -1,7 +1,6 @@
 #pragma once
 
 #define GLFW_EXPOSE_NATIVE_WIN32
-
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
 
@@ -9,25 +8,39 @@
 
 namespace gvsx {
 
-	class cWindowManager
-	{
-	public:
-		static void Init();
-		static void Free();
+	namespace window {
 
-		static void Create(int width, int height, const char* title);
-		static void Destroy(GLFWwindow* window);
+		struct sWindowDescription
+		{
+			const char* Title = "Window";
 
-		static GLFWwindow* GetWindow();
-		static void* GetWindow32();
-		static bool CheckClosed();
-		
-		static void MakeCurrent(GLFWwindow* window);
-		static void SwapBuffer(GLFWwindow* window);
-		static void CheckEvents();
+			int Width = 640;
+			int Height = 640;
 
-	private:
-		static GLFWwindow* m_Window;
-	};
+			bool VSync = false;
+			bool Fullscreen = false;
+		};
 
+		class cWindowManager
+		{
+		public:
+			static void Init();
+			static void Free();
+
+			static void InitWindow(sWindowDescription desc);
+			static void FreeWindow();
+
+			static GLFWwindow* GetWindow();
+			static void* GetWin32Window();
+
+			static bool CheckClosed();
+
+			static void SwapBuffers();
+			static void CheckEvents();
+
+		private:
+			static GLFWwindow* m_Window;
+		};
+
+	}
 };

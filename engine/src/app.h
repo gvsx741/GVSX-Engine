@@ -13,9 +13,6 @@ namespace gvsx {
 		void Free();
 
 		void Run();
-		
-	private:
-
 	};
 
 }
