@@ -1,16 +1,14 @@
 #include <app.h>
 
-#include <iostream>
-
 namespace gvsx {
 
-	//using namespace render;
 	using namespace window;
+	using namespace render;
 
 	void cApp::Init()
 	{
 		cWindowManager::Init();
-		cWindowManager::InitWindow(sWindowDescription());
+		cWindowManager::InitWindow(sWindowDesc());
 	}
 
 	void cApp::Free()

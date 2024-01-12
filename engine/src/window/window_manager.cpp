@@ -5,6 +5,7 @@ namespace gvsx {
 	namespace window {
 
 		GLFWwindow* cWindowManager::m_Window = nullptr;
+		sWindowDesc cWindowManager::m_WindowDesc;
 
 		void cWindowManager::Init()
 		{
@@ -18,8 +19,10 @@ namespace gvsx {
 			glfwTerminate();
 		}
 
-		void cWindowManager::InitWindow(sWindowDescription desc)
+		void cWindowManager::InitWindow(sWindowDesc desc)
 		{
+			m_WindowDesc = desc;
+
 			m_Window = glfwCreateWindow(desc.Width, desc.Height, desc.Title, NULL, NULL);
 
 			if (!m_Window)
@@ -55,6 +58,11 @@ namespace gvsx {
 		void* cWindowManager::GetWin32Window()
 		{
 			return glfwGetWin32Window(m_Window);
+		}
+
+		const sWindowDesc& cWindowManager::GetDescription()
+		{
+			return m_WindowDesc;
 		}
 
 		bool cWindowManager::CheckClosed()

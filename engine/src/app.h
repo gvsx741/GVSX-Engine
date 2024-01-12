@@ -1,8 +1,8 @@
 #pragma once
-#include <render/context.h>
+#include <render/render_system.h>
 #include <window/window_manager.h>
 
-//#include <render/render_system.h>
+#include <iostream>
 
 namespace gvsx {
 

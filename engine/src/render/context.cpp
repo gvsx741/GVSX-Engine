@@ -37,7 +37,7 @@ namespace gvsx {
                     &pDeviceContext);
             }
 
-            void CleanDX11()
+            void FreeDX11()
             {
                 // close and release all existing COM objects
                 pSwapChain->Release();

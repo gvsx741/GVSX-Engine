@@ -14,7 +14,7 @@ namespace gvsx {
 			static ID3D11DeviceContext* pDeviceContext;
 
 			void InitDX11(HWND hWnd);
-			void CleanDX11();
+			void FreeDX11();
 		}
 	}
 }

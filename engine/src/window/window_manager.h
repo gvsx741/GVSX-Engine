@@ -10,7 +10,7 @@ namespace gvsx {
 
 	namespace window {
 
-		struct sWindowDescription
+		struct sWindowDesc
 		{
 			const char* Title = "Window";
 
@@ -27,11 +27,12 @@ namespace gvsx {
 			static void Init();
 			static void Free();
 
-			static void InitWindow(sWindowDescription desc);
+			static void InitWindow(sWindowDesc desc);
 			static void FreeWindow();
 
 			static GLFWwindow* GetWindow();
 			static void* GetWin32Window();
+			static const sWindowDesc& GetDescription();
 
 			static bool CheckClosed();
 
@@ -40,6 +41,7 @@ namespace gvsx {
 
 		private:
 			static GLFWwindow* m_Window;
+			static sWindowDesc m_WindowDesc;
 		};
 
 	}
