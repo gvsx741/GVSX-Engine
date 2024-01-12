@@ -1,7 +1,8 @@
 #include <window/window_manager.h>
-#include <iostream>
 
 namespace gvsx {
+
+	GLFWwindow* cWindowManager::m_Window = nullptr;
 
 	void cWindowManager::Init()
 	{
@@ -15,16 +16,14 @@ namespace gvsx {
 		glfwTerminate();
 	}
 
-	GLFWwindow* cWindowManager::Create(int width, int height, const char* title)
+	void cWindowManager::Create(int width, int height, const char* title)
 	{
-		GLFWwindow* window = glfwCreateWindow(width, height, title, NULL, NULL);
+		m_Window = glfwCreateWindow(width, height, title, NULL, NULL);
 		
-		if (!window)
+		if (!m_Window)
 		{
 			std::cout << "Window is not created" << std::endl;
 		}
-
-		return window;
 	}
 
 	void cWindowManager::Destroy(GLFWwindow* window)
@@ -47,8 +46,18 @@ namespace gvsx {
 		glfwSwapBuffers(window);
 	}
 
-	bool cWindowManager::CheckClosed(GLFWwindow* window)
+	GLFWwindow* cWindowManager::GetWindow()
 	{
-		return glfwWindowShouldClose(window);
+		return m_Window;
+	}
+
+	void* cWindowManager::GetWindow32()
+	{
+		return glfwGetWin32Window(m_Window);
+	}
+
+	bool cWindowManager::CheckClosed()
+	{
+		return glfwWindowShouldClose(m_Window);
 	}
 };

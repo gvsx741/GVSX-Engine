@@ -1,11 +1,17 @@
 #include <app.h>
+
 #include <iostream>
 
 namespace gvsx {
 
+	//using namespace render;
+
 	void cApp::Init()
 	{
 		cWindowManager::Init();
+		cWindowManager::Create(640, 640, "GVSX_WINDOW");
+		cWindowManager::MakeCurrent(cWindowManager::GetWindow());
+
 	}
 
 	void cApp::Free()
@@ -15,18 +21,13 @@ namespace gvsx {
 
 	void cApp::Run()
 	{
-
-		window = cWindowManager::Create(640, 640, "GVSX_WINDOW");
-
-		cWindowManager::MakeCurrent(window);
-		
-		while(!cWindowManager::CheckClosed(window))
+		while(!cWindowManager::CheckClosed())
 		{
-			cWindowManager::SwapBuffer(window);
+			cWindowManager::SwapBuffer(cWindowManager::GetWindow());
 			cWindowManager::CheckEvents();
 		}
 
-		cWindowManager::Destroy(window);
+		cWindowManager::Destroy(cWindowManager::GetWindow());
 	}
 
 }
