@@ -18,8 +18,13 @@ namespace gvsx {
 
 	void cApp::Run()
 	{
+		cRenderSystem RenderSystem;
+
+		RenderSystem.Init((HWND)cWindowManager::GetWin32Window());
+
 		while(!cWindowManager::CheckClosed())
 		{
+			RenderSystem.Update();
 			cWindowManager::SwapBuffers();
 			cWindowManager::CheckEvents();
 		}

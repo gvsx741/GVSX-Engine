@@ -12,8 +12,10 @@ namespace gvsx {
 			static IDXGISwapChain* pSwapChain;
 			static ID3D11Device* pDevice;
 			static ID3D11DeviceContext* pDeviceContext;
+			static ID3D11RenderTargetView* pBackBuffer;
 
 			void InitDX11(HWND hWnd);
+			void Render();
 			void FreeDX11();
 		}
 	}

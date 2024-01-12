@@ -1,10 +1,14 @@
 #include <render/context.h>
 
+#include <glm/glm.hpp>
+
 namespace gvsx {
 
 	namespace render {
 
 		namespace context {
+
+            float color[]{ 1.0f, 1.0f, 1.0f, 1.0f };
 
             void InitDX11(HWND hWnd)
             {
@@ -35,12 +39,40 @@ namespace gvsx {
                     &pDevice,
                     NULL,
                     &pDeviceContext);
+
+                // get the address of the back buffer
+                ID3D11Texture2D* pAddressBackBuffer;
+                pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pAddressBackBuffer);
+
+                // use the back buffer address to create the render target
+                pDevice->CreateRenderTargetView(pAddressBackBuffer, NULL, &pBackBuffer);
+                pAddressBackBuffer->Release();
+
+                // set the render target as the back buffer
+                pDeviceContext->OMSetRenderTargets(1, &pBackBuffer, NULL);
+
+                // Set the viewport
+                D3D11_VIEWPORT viewport;
+                ZeroMemory(&viewport, sizeof(D3D11_VIEWPORT));
+
+                viewport.TopLeftX = 0;
+                viewport.TopLeftY = 0;
+                viewport.Width = 640;
+                viewport.Height = 640;
+
+                pDeviceContext->RSSetViewports(1, &viewport);
+            }
+
+            void Render()
+            {
+                pDeviceContext->ClearRenderTargetView(pBackBuffer, color);
+                pSwapChain->Present(0, 0);
             }
 
             void FreeDX11()
             {
-                // close and release all existing COM objects
                 pSwapChain->Release();
+                pBackBuffer->Release();
                 pDevice->Release();
                 pDeviceContext->Release();
             }

@@ -40,7 +40,7 @@ namespace gvsx {
 			static void CheckEvents();
 
 		private:
-			static GLFWwindow* m_Window;
+			static GLFWwindow* m_pWindow;
 			static sWindowDesc m_WindowDesc;
 		};
 

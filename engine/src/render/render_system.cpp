@@ -28,7 +28,7 @@ namespace gvsx {
 
 		void cRenderSystem::Update()
 		{
-
+			Render();
 		}
 
 	}

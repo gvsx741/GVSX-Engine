@@ -4,7 +4,7 @@ namespace gvsx {
 
 	namespace window {
 
-		GLFWwindow* cWindowManager::m_Window = nullptr;
+		GLFWwindow* cWindowManager::m_pWindow = nullptr;
 		sWindowDesc cWindowManager::m_WindowDesc;
 
 		void cWindowManager::Init()
@@ -23,20 +23,20 @@ namespace gvsx {
 		{
 			m_WindowDesc = desc;
 
-			m_Window = glfwCreateWindow(desc.Width, desc.Height, desc.Title, NULL, NULL);
+			m_pWindow = glfwCreateWindow(desc.Width, desc.Height, desc.Title, NULL, NULL);
 
-			if (!m_Window)
+			if (!m_pWindow)
 			{
 				std::cout << "Window is not created" << std::endl;
 			}
 
-			glfwMakeContextCurrent(m_Window);
+			glfwMakeContextCurrent(m_pWindow);
 		}
 
 		void cWindowManager::FreeWindow()
 		{
-			if (m_Window != nullptr) {
-				glfwDestroyWindow(m_Window);
+			if (m_pWindow != nullptr) {
+				glfwDestroyWindow(m_pWindow);
 			}
 		}
 
@@ -47,17 +47,17 @@ namespace gvsx {
 
 		void cWindowManager::SwapBuffers()
 		{
-			glfwSwapBuffers(m_Window);
+			glfwSwapBuffers(m_pWindow);
 		}
 
 		GLFWwindow* cWindowManager::GetWindow()
 		{
-			return m_Window;
+			return m_pWindow;
 		}
 
 		void* cWindowManager::GetWin32Window()
 		{
-			return glfwGetWin32Window(m_Window);
+			return glfwGetWin32Window(m_pWindow);
 		}
 
 		const sWindowDesc& cWindowManager::GetDescription()
@@ -67,7 +67,7 @@ namespace gvsx {
 
 		bool cWindowManager::CheckClosed()
 		{
-			return glfwWindowShouldClose(m_Window);
+			return glfwWindowShouldClose(m_pWindow);
 		}
 	}
 };
