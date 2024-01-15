@@ -1,8 +1,12 @@
 #include <window/window_manager.h>
 
+#include <core/logger.h>
+
 namespace gvsx {
 
 	namespace window {
+
+		using namespace core;
 
 		GLFWmonitor* cWindowManager::m_pMainMonitor = nullptr;
 		GLFWwindow* cWindowManager::m_pWindow = nullptr;
@@ -11,7 +15,7 @@ namespace gvsx {
 		void cWindowManager::Init()
 		{
 			if (!glfwInit()) {
-				std::cout << "GLFW is not init" << std::endl;
+				LogError("GLFW is not init");
 			}
 
 			m_pMainMonitor = glfwGetPrimaryMonitor();
@@ -30,7 +34,7 @@ namespace gvsx {
 
 			if (!m_pWindow)
 			{
-				std::cout << "Window is not created" << std::endl;
+				LogError("Window is not created");
 			}
 
 			glfwMakeContextCurrent(m_pWindow);

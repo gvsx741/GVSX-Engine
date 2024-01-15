@@ -19,6 +19,7 @@ add_executable(gvsx-engine ${SOURCE_FILES})
 
 add_subdirectory(thirdparty/glfw)
 add_subdirectory(thirdparty/glm)
+add_subdirectory(thirdparty/spdlog)
 
 target_link_libraries(gvsx-engine PRIVATE d3d11)
-target_link_libraries(gvsx-engine PUBLIC glfw glm)
+target_link_libraries(gvsx-engine PUBLIC glfw glm spdlog)
