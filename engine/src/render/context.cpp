@@ -8,25 +8,59 @@ namespace gvsx {
 
 		namespace context {
 
-            float color[]{ 1.0f, 1.0f, 1.0f, 1.0f };
+            using namespace window;
 
-            void InitDX11(HWND hWnd)
+            float color[]{ 0.0f, 0.2f, 0.4f, 1.0f };
+
+            void InitDX11()
             {
-                // create a struct to hold information about the swap chain
-                DXGI_SWAP_CHAIN_DESC SwapChainDesc;
+                CreateSwapChain();
 
-                // clear out the struct for use
-                ZeroMemory(&SwapChainDesc, sizeof(DXGI_SWAP_CHAIN_DESC));
+                ID3D11Texture2D* pResource;
+                pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pResource);
 
-                // fill the swap chain description struct
-                SwapChainDesc.BufferCount = 1;                                    // one back buffer
-                SwapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;     // use 32-bit color
-                SwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      // how swap chain is to be used
-                SwapChainDesc.OutputWindow = hWnd;                                // the window to be used
-                SwapChainDesc.SampleDesc.Count = 4;                               // how many multisamples
-                SwapChainDesc.Windowed = TRUE;                                    // windowed/full-screen mode
+                pDevice->CreateRenderTargetView(pResource, NULL, &pBackBuffer);
+                pResource->Release();
 
-                // create a device, device context and swap chain using the information in the scd struct
+                pDeviceContext->OMSetRenderTargets(1, &pBackBuffer, NULL);
+
+                auto winDesc = cWindowManager::GetDesc();
+                SetViewport(winDesc.TopLeftX, winDesc.TopLeftY, winDesc.Width, winDesc.Height);
+            }
+
+            void FreeDX11()
+            {
+                pSwapChain->Release();
+                pBackBuffer->Release();
+                pDevice->Release();
+                pDeviceContext->Release();
+            }
+
+            void Render()
+            {
+                pDeviceContext->ClearRenderTargetView(pBackBuffer, color);
+                pSwapChain->Present(0, 0);
+            }
+
+            void CreateSwapChain()
+            {
+                DXGI_MODE_DESC BufferDesc{};
+
+                BufferDesc.Width = cWindowManager::GetWidth();
+                BufferDesc.Height = cWindowManager::GetHeight();
+                BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+                BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+                BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+                
+                DXGI_SWAP_CHAIN_DESC SwapChainDesc{};
+
+                SwapChainDesc.BufferCount = 1;                                    
+                SwapChainDesc.BufferDesc = BufferDesc;
+                SwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;      
+                SwapChainDesc.OutputWindow = (HWND)cWindowManager::GetWin32Instance();                                
+                SwapChainDesc.SampleDesc.Count = 4;                               
+                SwapChainDesc.Windowed = !cWindowManager::isFullScreen();;
+
                 D3D11CreateDeviceAndSwapChain(NULL,
                     D3D_DRIVER_TYPE_HARDWARE,
                     NULL,
@@ -39,42 +73,18 @@ namespace gvsx {
                     &pDevice,
                     NULL,
                     &pDeviceContext);
+            }
 
-                // get the address of the back buffer
-                ID3D11Texture2D* pAddressBackBuffer;
-                pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pAddressBackBuffer);
+            void SetViewport(int TopLeftX, int TopLeftY, int Width, int Height)
+            {
+                D3D11_VIEWPORT viewport{};
 
-                // use the back buffer address to create the render target
-                pDevice->CreateRenderTargetView(pAddressBackBuffer, NULL, &pBackBuffer);
-                pAddressBackBuffer->Release();
-
-                // set the render target as the back buffer
-                pDeviceContext->OMSetRenderTargets(1, &pBackBuffer, NULL);
-
-                // Set the viewport
-                D3D11_VIEWPORT viewport;
-                ZeroMemory(&viewport, sizeof(D3D11_VIEWPORT));
-
-                viewport.TopLeftX = 0;
-                viewport.TopLeftY = 0;
-                viewport.Width = 640;
-                viewport.Height = 640;
+                viewport.TopLeftX = TopLeftX;
+                viewport.TopLeftY = TopLeftX;
+                viewport.Width = Width;
+                viewport.Height = Height;
 
                 pDeviceContext->RSSetViewports(1, &viewport);
-            }
-
-            void Render()
-            {
-                pDeviceContext->ClearRenderTargetView(pBackBuffer, color);
-                pSwapChain->Present(0, 0);
-            }
-
-            void FreeDX11()
-            {
-                pSwapChain->Release();
-                pBackBuffer->Release();
-                pDevice->Release();
-                pDeviceContext->Release();
             }
 		}
 	}

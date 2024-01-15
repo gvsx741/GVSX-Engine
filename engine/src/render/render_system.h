@@ -11,7 +11,7 @@ namespace gvsx {
 			cRenderSystem();
 			~cRenderSystem();
 
-			void Init(HWND hWnd);
+			void Init();
 			void Free();
 
 			void Update();

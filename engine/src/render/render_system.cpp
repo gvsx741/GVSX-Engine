@@ -16,9 +16,9 @@ namespace gvsx {
 
 		}
 
-		void cRenderSystem::Init(HWND hWnd)
+		void cRenderSystem::Init()
 		{
-			InitDX11(hWnd);
+			InitDX11();
 		}
 
 		void cRenderSystem::Free()

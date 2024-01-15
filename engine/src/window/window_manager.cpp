@@ -4,6 +4,7 @@ namespace gvsx {
 
 	namespace window {
 
+		GLFWmonitor* cWindowManager::m_pMainMonitor = nullptr;
 		GLFWwindow* cWindowManager::m_pWindow = nullptr;
 		sWindowDesc cWindowManager::m_WindowDesc;
 
@@ -12,6 +13,8 @@ namespace gvsx {
 			if (!glfwInit()) {
 				std::cout << "GLFW is not init" << std::endl;
 			}
+
+			m_pMainMonitor = glfwGetPrimaryMonitor();
 		}
 
 		void cWindowManager::Free()
@@ -40,9 +43,49 @@ namespace gvsx {
 			}
 		}
 
-		void cWindowManager::CheckEvents()
+		GLFWwindow* cWindowManager::GetInstance()
 		{
-			glfwPollEvents();
+			return m_pWindow;
+		}
+
+		void* cWindowManager::GetWin32Instance()
+		{
+			return glfwGetWin32Window(m_pWindow);
+		}
+
+		const sWindowDesc& cWindowManager::GetDesc()
+		{
+			return m_WindowDesc;
+		}
+
+		bool cWindowManager::isClosed()
+		{
+			return glfwWindowShouldClose(m_pWindow);
+		}
+
+		bool cWindowManager::isFullScreen()
+		{
+			return m_WindowDesc.Fullscreen;
+		}
+
+		int cWindowManager::GetWidth()
+		{
+			return m_WindowDesc.Width;
+		}
+
+		int cWindowManager::GetHeight()
+		{
+			return m_WindowDesc.Height;
+		}
+
+		int cWindowManager::GetTopLeftX()
+		{
+			return m_WindowDesc.TopLeftX;
+		}
+
+		int cWindowManager::GetTopLeftY()
+		{
+			return m_WindowDesc.TopLeftY;
 		}
 
 		void cWindowManager::SwapBuffers()
@@ -50,24 +93,9 @@ namespace gvsx {
 			glfwSwapBuffers(m_pWindow);
 		}
 
-		GLFWwindow* cWindowManager::GetWindow()
+		void cWindowManager::CheckEvents()
 		{
-			return m_pWindow;
-		}
-
-		void* cWindowManager::GetWin32Window()
-		{
-			return glfwGetWin32Window(m_pWindow);
-		}
-
-		const sWindowDesc& cWindowManager::GetDescription()
-		{
-			return m_WindowDesc;
-		}
-
-		bool cWindowManager::CheckClosed()
-		{
-			return glfwWindowShouldClose(m_pWindow);
+			glfwPollEvents();
 		}
 	}
 };
