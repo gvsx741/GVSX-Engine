@@ -1,5 +1,6 @@
 #include <render/render_system.h>
 
+#include <render/context.h>
 #include <core/logger.h>
 
 namespace gvsx {

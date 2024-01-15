@@ -1,5 +1,8 @@
 #include <app.h>
 
+#include <render/render_system.h>
+#include <window/window_manager.h>
+
 #include <core/logger.h>
 
 namespace gvsx {
