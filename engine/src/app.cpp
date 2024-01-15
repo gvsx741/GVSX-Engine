@@ -29,6 +29,8 @@ namespace gvsx {
 
 			RenderSystem.Update();
 		}
+
+		RenderSystem.Free();
 	}
 
 }
