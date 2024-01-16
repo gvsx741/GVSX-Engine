@@ -7,9 +7,6 @@ namespace gvsx {
 		class cRenderSystem
 		{
 		public:
-			cRenderSystem();
-			~cRenderSystem();
-
 			void Init();
 			void Free();
 

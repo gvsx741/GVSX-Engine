@@ -8,9 +8,9 @@ namespace gvsx {
 
 		using namespace core;
 
-		GLFWmonitor* cWindowManager::m_pMainMonitor = nullptr;
-		GLFWwindow* cWindowManager::m_pWindow = nullptr;
-		sWindowDesc cWindowManager::m_WindowDesc;
+		GLFWmonitor* cWindowManager::s_MainMonitor = nullptr;
+		GLFWwindow* cWindowManager::s_Window = nullptr;
+		sWindowDesc cWindowManager::s_WindowDesc;
 
 		void cWindowManager::Init()
 		{
@@ -18,7 +18,7 @@ namespace gvsx {
 				LogError("GLFW is not init");
 			}
 
-			m_pMainMonitor = glfwGetPrimaryMonitor();
+			s_MainMonitor = glfwGetPrimaryMonitor();
 		}
 
 		void cWindowManager::Free()
@@ -28,73 +28,73 @@ namespace gvsx {
 
 		void cWindowManager::InitWindow(sWindowDesc desc)
 		{
-			m_WindowDesc = desc;
+			s_WindowDesc = desc;
 
-			m_pWindow = glfwCreateWindow(desc.Width, desc.Height, desc.Title, NULL, NULL);
+			s_Window = glfwCreateWindow(desc.Width, desc.Height, desc.Title, NULL, NULL);
 
-			if (!m_pWindow)
+			if (!s_Window)
 			{
 				LogError("Window is not created");
 			}
 
-			glfwMakeContextCurrent(m_pWindow);
+			glfwMakeContextCurrent(s_Window);
 		}
 
 		void cWindowManager::FreeWindow()
 		{
-			if (m_pWindow != nullptr) {
-				glfwDestroyWindow(m_pWindow);
+			if (s_Window != nullptr) {
+				glfwDestroyWindow(s_Window);
 			}
 		}
 
 		GLFWwindow* cWindowManager::GetInstance()
 		{
-			return m_pWindow;
+			return s_Window;
 		}
 
 		void* cWindowManager::GetWin32Instance()
 		{
-			return glfwGetWin32Window(m_pWindow);
+			return glfwGetWin32Window(s_Window);
 		}
 
 		const sWindowDesc& cWindowManager::GetDesc()
 		{
-			return m_WindowDesc;
+			return s_WindowDesc;
 		}
 
 		bool cWindowManager::isClosed()
 		{
-			return glfwWindowShouldClose(m_pWindow);
+			return glfwWindowShouldClose(s_Window);
 		}
 
 		bool cWindowManager::isFullScreen()
 		{
-			return m_WindowDesc.Fullscreen;
+			return s_WindowDesc.Fullscreen;
 		}
 
 		int cWindowManager::GetWidth()
 		{
-			return m_WindowDesc.Width;
+			return s_WindowDesc.Width;
 		}
 
 		int cWindowManager::GetHeight()
 		{
-			return m_WindowDesc.Height;
+			return s_WindowDesc.Height;
 		}
 
 		int cWindowManager::GetTopLeftX()
 		{
-			return m_WindowDesc.TopLeftX;
+			return s_WindowDesc.TopLeftX;
 		}
 
 		int cWindowManager::GetTopLeftY()
 		{
-			return m_WindowDesc.TopLeftY;
+			return s_WindowDesc.TopLeftY;
 		}
 
 		void cWindowManager::SwapBuffers()
 		{
-			glfwSwapBuffers(m_pWindow);
+			glfwSwapBuffers(s_Window);
 		}
 
 		void cWindowManager::CheckEvents()

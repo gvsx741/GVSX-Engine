@@ -1,6 +1,8 @@
 #include <render/render_system.h>
 
 #include <render/context.h>
+
+#include <core/app.h>
 #include <core/logger.h>
 
 namespace gvsx {
@@ -9,16 +11,6 @@ namespace gvsx {
 
 		using namespace core;
 		using namespace context;
-		
-		cRenderSystem::cRenderSystem()
-		{
-
-		}
-
-		cRenderSystem::~cRenderSystem()
-		{
-
-		}
 
 		void cRenderSystem::Init()
 		{

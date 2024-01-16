@@ -1,12 +1,11 @@
-#include <app.h>
+#include <core/app.h>
 
 using namespace gvsx;
+using namespace core;
 
-int main()
+void main()
 {
-	cApp app;
-	
-	app.Init();
-	app.Run();
-	app.Free();
+	cApp* app = new cApp();
+
+	app->Run();
 }

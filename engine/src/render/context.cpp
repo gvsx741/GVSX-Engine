@@ -1,5 +1,7 @@
 #include <render/context.h>
 
+#include <window/window_manager.h>
+
 #include <glm/glm.hpp>
 
 namespace gvsx {
@@ -17,12 +19,12 @@ namespace gvsx {
                 CreateSwapChain();
 
                 ID3D11Texture2D* pResource;
-                pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pResource);
+                SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pResource);
 
-                pDevice->CreateRenderTargetView(pResource, NULL, &pBackBuffer);
+                Device->CreateRenderTargetView(pResource, NULL, &BackBuffer);
                 pResource->Release();
 
-                pDeviceContext->OMSetRenderTargets(1, &pBackBuffer, NULL);
+                DeviceContext->OMSetRenderTargets(1, &BackBuffer, NULL);
 
                 auto winDesc = cWindowManager::GetDesc();
                 SetViewport(winDesc.TopLeftX, winDesc.TopLeftY, winDesc.Width, winDesc.Height);
@@ -30,16 +32,16 @@ namespace gvsx {
 
             void FreeDX11()
             {
-                pSwapChain->Release();
-                pBackBuffer->Release();
-                pDevice->Release();
-                pDeviceContext->Release();
+                SwapChain->Release();
+                BackBuffer->Release();
+                Device->Release();
+                DeviceContext->Release();
             }
 
             void Render()
             {
-                pDeviceContext->ClearRenderTargetView(pBackBuffer, color);
-                pSwapChain->Present(0, 0);
+                DeviceContext->ClearRenderTargetView(BackBuffer, color);
+                SwapChain->Present(0, 0);
             }
 
             void CreateSwapChain()
@@ -69,10 +71,10 @@ namespace gvsx {
                     NULL,
                     D3D11_SDK_VERSION,
                     &SwapChainDesc,
-                    &pSwapChain,
-                    &pDevice,
+                    &SwapChain,
+                    &Device,
                     NULL,
-                    &pDeviceContext);
+                    &DeviceContext);
             }
 
             void SetViewport(int TopLeftX, int TopLeftY, int Width, int Height)
@@ -84,7 +86,7 @@ namespace gvsx {
                 viewport.Width = Width;
                 viewport.Height = Height;
 
-                pDeviceContext->RSSetViewports(1, &viewport);
+                DeviceContext->RSSetViewports(1, &viewport);
             }
 		}
 	}

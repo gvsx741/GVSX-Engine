@@ -18,7 +18,7 @@ namespace gvsx {
 			int Width = 640;
 			int Height = 640;
 
-			bool VSync = false;
+			//bool VSync = false;
 			bool Fullscreen = false;
 		};
 
@@ -47,9 +47,9 @@ namespace gvsx {
 			static void CheckEvents();
 
 		private:
-			static GLFWmonitor* m_pMainMonitor;
-			static GLFWwindow* m_pWindow;
-			static sWindowDesc m_WindowDesc;
+			static GLFWmonitor* s_MainMonitor;
+			static GLFWwindow* s_Window;
+			static sWindowDesc s_WindowDesc;
 		};
 
 	}
