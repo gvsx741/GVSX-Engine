@@ -36,7 +36,7 @@ namespace gvsx {
 			cWindowManager::Init();
 			cWindowManager::InitWindow(sWindowDesc());
 
-			m_RenderSystem->Init();
+			m_RenderSystem->Init();	
 
 			LogInfo("Application initialized");
 		}
