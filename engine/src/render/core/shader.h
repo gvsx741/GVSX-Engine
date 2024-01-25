@@ -10,13 +10,19 @@ namespace gvsx {
 		{
 			NONE = -1,
 			VERTEX = 0,
-			PIXEL = 1
+			PIXEL = 1,
+			GEOMETRY = 2,
+			COMPUTE = 3,
 		};
 
-		class cShader 
+		class cShader
 		{
-			eShaderType type;
-			ID3D10Blob *shader;
+		public:
+			cShader() {}
+			cShader(eShaderType type) : Type(type) {}
+
+			eShaderType Type;
+			ID3D10Blob *Blob;
 		};
 	}
 }

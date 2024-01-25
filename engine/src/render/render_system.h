@@ -13,6 +13,7 @@ namespace gvsx {
 			void Update();
 
 		private:
+			void InitPipeline();
 
 		};
 

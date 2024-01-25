@@ -17,6 +17,7 @@ namespace gvsx {
 			LogInfo("Render system initialization");
 
 			InitDX11();
+			InitPipeline();
 
 			LogInfo("Render system initialized");
 		}
@@ -30,6 +31,11 @@ namespace gvsx {
 		void cRenderSystem::Update()
 		{
 			Render();
+		}
+
+		void cRenderSystem::InitPipeline()
+		{
+
 		}
 
 	}
