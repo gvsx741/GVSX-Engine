@@ -1,12 +1,20 @@
 #pragma once 
 
 #include <render/core/context.h>
+#include <string>
 
 namespace gvsx {
 
 	namespace render
 	{
-		enum class eShaderType
+		struct sBlob
+		{
+			void* Instance = nullptr;
+			void* ByteCode = nullptr;
+			unsigned int ByteCodeSize = 0;
+		};
+
+		enum class eShaderStageType
 		{
 			NONE = -1,
 			VERTEX = 0,
@@ -15,14 +23,18 @@ namespace gvsx {
 			COMPUTE = 3,
 		};
 
-		class cShader
+		struct sShaderStage
 		{
-		public:
-			cShader() {}
-			cShader(eShaderType type) : Type(type) {}
+			sShaderStage() = default;
+			sShaderStage(eShaderStageType type) : Type(type) {}
 
-			eShaderType Type;
-			ID3D10Blob *Blob;
+			bool Compiled = false;
+			
+			std::string Profile;
+			std::string Source;
+			
+			eShaderStageType Type;
+			sBlob Blob;
 		};
 	}
 }

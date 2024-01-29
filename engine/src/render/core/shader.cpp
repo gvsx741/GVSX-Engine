@@ -1,7 +1,0 @@
-namespace gvsx {
-
-	namespace render
-	{
-
-	}
-}

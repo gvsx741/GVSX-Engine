@@ -1,6 +1,6 @@
 #pragma once 
 #include <render/core/shader.h>
-#include <unordered_map>
+#include <unordered_map> //temporarily
 
 namespace gvsx {
 
@@ -9,13 +9,14 @@ namespace gvsx {
 		class cShaderManager
 		{
 		public:
-
-			static cShader* LoadShader(const char* filename, eShaderType type);
-			static void SetShader(const char* filename);
+			static sShaderStage* CreateStageFromFile(const char* filepath, eShaderStageType type);
 
 		private:
+			static void CompileShaderStage(sShaderStage& stage);
+			static void CreateShaderStage(sShaderStage& stage);
 
-			static std::unordered_map<const char*, cShader*> m_Shaders;
+		private:
+			static std::unordered_map<const char*, sShaderStage*> s_Stages;
 		
 		};
 	}
