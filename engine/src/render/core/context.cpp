@@ -4,6 +4,10 @@
 
 #include <glm/glm.hpp>
 
+#include <core/data_types.h>
+#include <core/stl.h>
+#include <core/logger.h>
+
 namespace gvsx {
 
 	namespace render {

@@ -3,6 +3,9 @@
 #include <render/core/context.h>
 
 #include <core/app.h>
+
+#include <core/data_types.h>
+#include <core/stl.h>
 #include <core/logger.h>
 
 namespace gvsx {

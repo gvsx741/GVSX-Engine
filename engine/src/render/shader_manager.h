@@ -1,6 +1,9 @@
 #pragma once 
 #include <render/core/shader.h>
-#include <unordered_map> //temporarily
+
+#include <core/data_types.h>
+#include <core/stl.h>
+#include <core/logger.h>
 
 namespace gvsx {
 

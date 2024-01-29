@@ -1,7 +1,10 @@
 #pragma once 
 
 #include <render/core/context.h>
-#include <string>
+
+#include <core/data_types.h>
+#include <core/stl.h>
+#include <core/logger.h>
 
 namespace gvsx {
 
@@ -11,7 +14,7 @@ namespace gvsx {
 		{
 			void* Instance = nullptr;
 			void* ByteCode = nullptr;
-			unsigned int ByteCodeSize = 0;
+			u32 ByteCodeSize = 0;
 		};
 
 		enum class eShaderStageType
