@@ -4,7 +4,7 @@ namespace gvsx {
 
 	namespace render {
 
-		class cRenderSystem
+		class ENGINE_API cRenderSystem
 		{
 		public:
 			void Init();

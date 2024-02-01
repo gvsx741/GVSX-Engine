@@ -2,16 +2,10 @@
 
 #include <render/core/context.h>
 
-#include <core/data_types.h>
-#include <core/stl.h>
-#include <core/logger.h>
-
 namespace gvsx {
 
 	namespace render
 	{
-		using namespace core;
-
 		struct sBlob
 		{
 			void* Instance = nullptr;
@@ -28,7 +22,7 @@ namespace gvsx {
 			COMPUTE = 3,
 		};
 
-		struct sShaderStage
+		struct ENGINE_API sShaderStage
 		{
 			sShaderStage() = default;
 			sShaderStage(eShaderStageType type) : Type(type) {}

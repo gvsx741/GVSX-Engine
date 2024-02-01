@@ -22,7 +22,7 @@ namespace gvsx {
 			bool Fullscreen = false;
 		};
 
-		class cWindowManager
+		class ENGINE_API cWindowManager
 		{
 		public:
 			static void Init();

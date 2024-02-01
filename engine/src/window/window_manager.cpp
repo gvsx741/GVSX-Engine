@@ -1,14 +1,8 @@
 #include <window/window_manager.h>
 
-#include <core/data_types.h>
-#include <core/stl.h>
-#include <core/logger.h>
-
 namespace gvsx {
 
 	namespace window {
-
-		using namespace core;
 
 		GLFWmonitor* cWindowManager::s_MainMonitor = nullptr;
 		GLFWwindow* cWindowManager::s_Window = nullptr;

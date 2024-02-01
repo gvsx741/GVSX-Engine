@@ -11,7 +11,7 @@ namespace gvsx {
 
 		using namespace render;
 
-		class cApp
+		class ENGINE_API cApp
 		{
 		public:
 			void Run();

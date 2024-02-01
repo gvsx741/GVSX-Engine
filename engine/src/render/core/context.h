@@ -18,14 +18,14 @@ namespace gvsx {
 			static IDXGISwapChain* SwapChain;
 			static ID3D11RenderTargetView* BackBuffer;
 
-			void InitDX11();
-			void FreeDX11();
+			void ENGINE_API InitDX11();
+			void ENGINE_API FreeDX11();
 
-			void CreateSwapChain();
+			void ENGINE_API CreateSwapChain();
 
-			void SetViewport(int TopLeftX, int TopLeftY, int Width, int Height);
+			void ENGINE_API SetViewport(int TopLeftX, int TopLeftY, int Width, int Height);
 
-			void Render();
+			void ENGINE_API Render();
 		}
 	}
 }

@@ -1,15 +1,11 @@
 #include <render/shader_manager.h>
-#include <render/core/context.h>
 
-#include <core/data_types.h>
-#include <core/stl.h>
-#include <core/logger.h>
+#include <render/core/context.h>
 
 namespace gvsx {
 
 	namespace render
 	{
-		using namespace core;
 		using namespace context;
 
 		std::unordered_map<const char*, sShaderStage*> cShaderManager::s_Stages = {};

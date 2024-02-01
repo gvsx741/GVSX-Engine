@@ -3,10 +3,6 @@
 #include <render/render_system.h>
 #include <window/window_manager.h>
 
-#include <core/data_types.h>
-#include <core/stl.h>
-#include <core/logger.h>
-
 namespace gvsx {
 
 	namespace core {
