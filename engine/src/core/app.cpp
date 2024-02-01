@@ -31,6 +31,10 @@ namespace gvsx {
 		{
 			LogInfo("Application initialization");
 
+			
+			LogInfo1(12);
+			
+			
 			cWindowManager::Init();
 			cWindowManager::InitWindow(sWindowDesc());
 
