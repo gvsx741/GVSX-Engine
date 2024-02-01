@@ -10,6 +10,8 @@ namespace gvsx {
 
 	namespace render
 	{
+		using namespace core;
+
 		struct sBlob
 		{
 			void* Instance = nullptr;

@@ -9,6 +9,8 @@ namespace gvsx {
 
 	namespace render
 	{
+		using namespace core;
+
 		class cShaderManager
 		{
 		public:
@@ -19,7 +21,7 @@ namespace gvsx {
 			static void CreateShaderStage(sShaderStage& stage);
 
 		private:
-			static std::unordered_map<const char*, sShaderStage*> s_Stages;
+			static unordered_map<const char*, sShaderStage*> s_Stages;
 		
 		};
 	}
