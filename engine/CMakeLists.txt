@@ -14,6 +14,9 @@ include_directories(
 		)
 		
 add_executable(gvsx-engine ${SOURCE_FILES})
+#add_library(gvsx-engine SHARED ${SOURCE_FILES})
+
+target_precompile_headers(gvsx-engine PRIVATE "src/pch.h")
 
 add_subdirectory(thirdparty/glfw)
 add_subdirectory(thirdparty/glm)

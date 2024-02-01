@@ -9,7 +9,7 @@ namespace gvsx {
 		public:
 			void Init();
 			void Free();
-
+			
 			void Update();
 
 		private:

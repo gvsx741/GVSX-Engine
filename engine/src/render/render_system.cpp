@@ -4,15 +4,10 @@
 
 #include <core/app.h>
 
-#include <core/data_types.h>
-#include <core/stl.h>
-#include <core/logger.h>
-
 namespace gvsx {
 
 	namespace render {
 
-		using namespace core;
 		using namespace context;
 
 		void cRenderSystem::Init()
