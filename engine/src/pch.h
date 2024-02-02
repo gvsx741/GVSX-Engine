@@ -1,7 +1,7 @@
 #pragma once 
 
 // MACRO
-#include <core/build macros.h>
+#include <core/build_macro.h>
 
 // STL
 #include <vector>
@@ -12,6 +12,8 @@
 // ENGINE
 #include <core/data_types.h>
 #include <core/stl.h>
+#include <core/object.h>
+#include <core/system.h>
 #include <core/logger.h>
 
 // NAMESPACE

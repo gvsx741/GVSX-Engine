@@ -8,8 +8,6 @@ namespace gvsx {
 		{
 		protected:
 
-		private:
-
 		};
 	}
 }
