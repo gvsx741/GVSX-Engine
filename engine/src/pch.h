@@ -2,6 +2,7 @@
 
 // MACRO
 #include <core/build_macro.h>
+#include <core/macro.h>
 
 // STL
 #include <vector>
