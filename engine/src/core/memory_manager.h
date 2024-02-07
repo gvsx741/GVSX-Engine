@@ -47,7 +47,7 @@ namespace gvsx {
 		class ENGINE_API cMemoryManager
 		{
 		public:
-			static cMemoryPoolStack* MainPools;
+			static cMemoryPoolStack* StackPools;
 
 			static void Init();
 			static void Reliase();
