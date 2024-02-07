@@ -19,7 +19,7 @@ namespace gvsx {
 			static ID3D11RenderTargetView* BackBuffer;
 
 			void ENGINE_API InitDX11();
-			void ENGINE_API FreeDX11();
+			void ENGINE_API ReliaseDX11();
 
 			void ENGINE_API CreateSwapChain();
 

@@ -20,9 +20,9 @@ namespace gvsx {
 			LogInfo("Render system initialized");
 		}
 
-		void cRenderSystem::Free()
+		void cRenderSystem::Reliase()
 		{
-			FreeDX11();
+			ReliaseDX11();
 			LogInfo("Render system free");
 		}
 

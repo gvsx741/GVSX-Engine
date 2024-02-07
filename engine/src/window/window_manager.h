@@ -26,10 +26,10 @@ namespace gvsx {
 		{
 		public:
 			static void Init();
-			static void Free();
+			static void Reliase();
 
 			static void InitWindow(sWindowDesc desc);
-			static void FreeWindow();
+			static void ReliaseWindow();
 
 			static GLFWwindow* GetInstance();
 			static void* GetWin32Instance();

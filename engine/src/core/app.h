@@ -18,7 +18,7 @@ namespace gvsx {
 
 		protected:
 			void Init();
-			void Free();
+			void Reliase();
 
 			cRenderSystem* m_RenderSystem = nullptr;
 		};

@@ -8,13 +8,12 @@ namespace gvsx {
 		{
 		public:
 			void Init();
-			void Free();
+			void Reliase();
 			
 			void Update();
 
 		private:
 			void InitPipeline();
-
 		};
 
 	}

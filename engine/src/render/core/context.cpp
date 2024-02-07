@@ -30,7 +30,7 @@ namespace gvsx {
                 SetViewport(winDesc.TopLeftX, winDesc.TopLeftY, winDesc.Width, winDesc.Height);
             }
 
-            void FreeDX11()
+            void ReliaseDX11()
             {
                 SwapChain->Release();
                 BackBuffer->Release();

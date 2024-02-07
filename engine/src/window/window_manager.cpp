@@ -17,7 +17,7 @@ namespace gvsx {
 			s_MainMonitor = glfwGetPrimaryMonitor();
 		}
 
-		void cWindowManager::Free()
+		void cWindowManager::Reliase()
 		{
 			glfwTerminate();
 		}
@@ -36,7 +36,7 @@ namespace gvsx {
 			glfwMakeContextCurrent(s_Window);
 		}
 
-		void cWindowManager::FreeWindow()
+		void cWindowManager::ReliaseWindow()
 		{
 			if (s_Window != nullptr) {
 				glfwDestroyWindow(s_Window);

@@ -8,7 +8,7 @@ namespace gvsx {
 		{
 		protected:
 			virtual void Init();
-			virtual void Free();
+			virtual void Reliase();
 			virtual void Update();
 		};
 	}

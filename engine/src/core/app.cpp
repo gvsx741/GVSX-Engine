@@ -24,7 +24,7 @@ namespace gvsx {
 				cWindowManager::CheckEvents();
 			}
 
-			Free();
+			Reliase();
 		}
 
 		void cApp::Init()
@@ -39,11 +39,11 @@ namespace gvsx {
 			LogInfo("Application initialized");
 		}
 
-		void cApp::Free()
+		void cApp::Reliase()
 		{
-			m_RenderSystem->Free();
+			m_RenderSystem->Reliase();
 
-			cWindowManager::Free();
+			cWindowManager::Reliase();
 
 			LogInfo("Application free");
 		}
