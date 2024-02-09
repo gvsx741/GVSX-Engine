@@ -6,7 +6,7 @@ namespace gvsx {
 
 		cMemoryPoolStack* cMemoryManager::s_Pools = nullptr;
 
-		void cMemoryPool::Init(u64 byteSize, u64 allocs, u64 alignment)
+		void cPool::Init(u64 byteSize, u64 allocs, u64 alignment)
 		{
 			if (alignment == 0) {
 				m_Memory = malloc(byteSize);
@@ -17,12 +17,12 @@ namespace gvsx {
 
 			m_ByteSize = byteSize;
 			m_LastAddress = m_Memory;
-			m_MaxAddress = (void*)((u64)m_Memory + byteSize); // carefull
+			m_MaxAddress = (void*)((u64)m_Memory + byteSize);
 			m_Allocs.reserve(allocs);
 			m_Alignment = alignment;
 		}
 
-		void cMemoryPool::Release()
+		void cPool::Release()
 		{
 			if (m_Alignment == 0) {
 				free(m_Memory);
@@ -34,13 +34,63 @@ namespace gvsx {
 			m_Allocs.clear();
 		}
 
-		void* cMemoryPool::Allocate(u64 size)
+		void* cPool::Allocate(u64 size)
 		{
-			return false;
+			for (auto& alloc : m_Allocs)
+			{
+				if (alloc.FreeFlag == 1u && alloc.Size >= size)
+				{
+					alloc.FreeFlag = 255u;
+					alloc.Used = size;
+
+					return alloc.Address;
+				}
+
+				// New allocation
+				if ((alloc.Size - alloc.Used) >= size)
+				{
+					sAllocation newAlloc;
+					newAlloc.FreeFlag = 0u;
+					newAlloc.Size = alloc.Size - alloc.Used;
+					newAlloc.Used = size;
+					newAlloc.Address = (void*)(((u64)alloc.Address) + ((u64)alloc.Used));
+
+					alloc.Size = alloc.Used;
+
+					m_Allocs.emplace_back(newAlloc);
+
+					return newAlloc.Address;
+				}
+			}
+
+			if (m_LastAddress >= m_MaxAddress) { return nullptr; }
+
+			sAllocation newAlloc;
+			newAlloc.FreeFlag = 0u;
+			newAlloc.Size = size;
+			newAlloc.Used = size;
+			newAlloc.Address = m_LastAddress;
+			m_Allocs.emplace_back(newAlloc);
+
+			// Update last address
+			m_LastAddress = (void*)(((u64)m_LastAddress) + size);
+
+			return newAlloc.Address;
 		}
 
-		bool cMemoryPool::Deallocate(void* address)
+		bool cPool::Deallocate(void* address)
 		{
+			for (auto& alloc : m_Allocs)
+			{
+				if (alloc.Address == address)
+				{
+					alloc.FreeFlag = 1u;
+					alloc.Used = 0;
+
+					return true;
+				}
+			}
+
 			return false;
 		}
 
@@ -51,7 +101,7 @@ namespace gvsx {
 
 			for (u32 i = 0; i < poolCount; i++)
 			{
-				cMemoryPool pool;
+				cPool pool;
 				pool.Init(poolByteSize, poolAllocs, alignment);
 				Pools.emplace_back(pool);
 			}
@@ -69,12 +119,35 @@ namespace gvsx {
 
 		void* cMemoryPoolStack::Allocate(u64 size)
 		{
-			return nullptr;
+			void* newAddress = nullptr;
+
+			for (auto& pool : Pools) {
+				newAddress = pool.Allocate(size);
+				if (newAddress != nullptr) {
+					return newAddress;
+				}
+			}
+
+			u64 poolSize = (size <= PoolByteSize) ? PoolByteSize : size;
+			TotalBytes += poolSize;
+
+			cPool newPool;
+			newPool.Init(poolSize, PoolAllocs, Alignment);
+			newAddress = newPool.Allocate(size);
+
+			Pools.emplace_back(newPool);
+
+			return newAddress;
 		}
 
 		bool cMemoryPoolStack::Deallocate(void* address)
 		{
-			return false;
+			for (auto& pool : Pools) {
+				// todo: Need to fix this
+				if (pool.Deallocate(address)) {
+					return true;
+				}
+			}
 		}
 
 		void cMemoryManager::Init()

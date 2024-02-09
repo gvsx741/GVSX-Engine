@@ -8,13 +8,13 @@ namespace gvsx {
 		{
 			u8 FreeFlag = 0;
 
-			u32 Width = 0;
+			u32 Size = 0;
 			u32 Used = 0;
 
 			void* Address = nullptr;
 		};
 
-		class ENGINE_API cMemoryPool
+		class ENGINE_API cPool
 		{
 		public:
 			void Init(u64 byteSize, u64 allocs, u64 alignment);
@@ -32,8 +32,6 @@ namespace gvsx {
 
 			u64 m_ByteSize; 
 			u64 m_BytesUsed = 0;
-			u64 m_BytesFreed = 0;
-			u64 m_LastFreedBytes = 0;
 
 			u64 m_Alignment = 0;
 		};
@@ -41,7 +39,7 @@ namespace gvsx {
 		class ENGINE_API cMemoryPoolStack
 		{
 		public:
-			std::vector<cMemoryPool> Pools;
+			std::vector<cPool> Pools;
 
 			u64 PoolByteSize = 0;
 			u64 PoolAllocs = 0;
@@ -50,8 +48,6 @@ namespace gvsx {
 			u64 TotalFreeCount = 0;
 
 			u64 TotalBytes = 0;
-			u64 TotalBytesOccupied = 0;
-			u64 TotalBytesFreed = 0;
 
 			u64 Alignment = 0;
 
