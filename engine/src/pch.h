@@ -4,12 +4,6 @@
 #include <core/build_macro.h>
 #include <core/macro.h>
 
-// STL
-#include <vector>
-#include <string>
-#include <map>
-#include <unordered_map>
-
 // ENGINE
 #include <core/data_types.h>
 #include <core/stl.h>

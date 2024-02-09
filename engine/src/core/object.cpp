@@ -1,20 +1,19 @@
 #pragma once
 
+#include <core/memory_manager.h>
+
 namespace gvsx {
 
-	namespace core {
+    namespace core {
 
-		using string = std::string;
+        void* cObject::operator new(u64 size)
+        {
+            return cMemoryManager::s_Pools->Allocate(size);
+        }
 
-		template<typename T>
-		using vector = std::vector<T>;
-
-		template<typename T, typename V>
-		using map = std::map<T, V>;
-
-		template<typename T, typename V>
-		using unordered_map = std::unordered_map<T, V>;
- 
-	}
+        void cObject::operator delete(void* address)
+        {
+            cMemoryManager::s_Pools->Deallocate(address);
+        }
+    }
 }
-

@@ -4,10 +4,11 @@ namespace gvsx {
 
 	namespace core {
 
-		class cObject
-		{
-		protected:
-
-		};
+        class ENGINE_API cObject
+        {
+        public:
+            void* operator new(u64 size);
+            void operator delete(void* address);
+        };
 	}
 }
