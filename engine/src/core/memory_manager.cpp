@@ -4,7 +4,7 @@ namespace gvsx {
 
 	namespace core {
 
-		cMemoryPoolStack* cMemoryManager::StackPools = nullptr;
+		cMemoryPoolStack* cMemoryManager::s_Pools = nullptr;
 
 		void cMemoryPool::Init(u64 byteSize, u64 allocs, u64 alignment)
 		{
@@ -36,7 +36,7 @@ namespace gvsx {
 
 		void* cMemoryPool::Allocate(u64 size)
 		{
-			return nullptr;
+			return false;
 		}
 
 		bool cMemoryPool::Deallocate(void* address)
@@ -67,15 +67,25 @@ namespace gvsx {
 			Pools.clear();
 		}
 
+		void* cMemoryPoolStack::Allocate(u64 size)
+		{
+			return nullptr;
+		}
+
+		bool cMemoryPoolStack::Deallocate(void* address)
+		{
+			return false;
+		}
+
 		void cMemoryManager::Init()
 		{
 			u64 memorySize = MEMORY_GB;
-			StackPools = new cMemoryPoolStack(1, memorySize, 1000, 0);
+			s_Pools = new cMemoryPoolStack(1, memorySize, 1000, 0);
 		}
 
 		void cMemoryManager::Reliase()
 		{
-			delete StackPools;
+			delete s_Pools;
 		}
 	}
 }

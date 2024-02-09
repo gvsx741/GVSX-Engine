@@ -6,16 +6,17 @@ namespace gvsx {
 
 		struct sAllocation
 		{
-			u32 AllocByteWidth = 0;
-			u32 OccupiedByteWidth = 0;
+			u8 FreeFlag = 0;
+
+			u32 Width = 0;
+			u32 Used = 0;
+
 			void* Address = nullptr;
 		};
 
 		class ENGINE_API cMemoryPool
 		{
 		public:
-			std::vector<sAllocation> m_Allocs;
-
 			void Init(u64 byteSize, u64 allocs, u64 alignment);
 			void Release();
 
@@ -23,12 +24,18 @@ namespace gvsx {
 			bool Deallocate(void* address);
 
 		private:
-			u64 m_ByteSize;
-			u64 m_Alignment = 0;
-
 			void* m_Memory;
 			void* m_LastAddress;
 			void* m_MaxAddress;
+
+			std::vector<sAllocation> m_Allocs;
+
+			u64 m_ByteSize; 
+			u64 m_BytesUsed = 0;
+			u64 m_BytesFreed = 0;
+			u64 m_LastFreedBytes = 0;
+
+			u64 m_Alignment = 0;
 		};
 
 		class ENGINE_API cMemoryPoolStack
@@ -38,16 +45,27 @@ namespace gvsx {
 
 			u64 PoolByteSize = 0;
 			u64 PoolAllocs = 0;
+
+			u64 TotalAllocCount = 0;
+			u64 TotalFreeCount = 0;
+
+			u64 TotalBytes = 0;
+			u64 TotalBytesOccupied = 0;
+			u64 TotalBytesFreed = 0;
+
 			u64 Alignment = 0;
 
 			cMemoryPoolStack(u64 poolCount, u64 poolByteSize, u64 poolAllocs, u64 alignment);
 			~cMemoryPoolStack();
+
+			void* Allocate(u64 size);
+			bool Deallocate(void* address);
 		};
 
 		class ENGINE_API cMemoryManager
 		{
 		public:
-			static cMemoryPoolStack* StackPools;
+			static cMemoryPoolStack* s_Pools;
 
 			static void Init();
 			static void Reliase();
