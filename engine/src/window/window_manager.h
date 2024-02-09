@@ -8,7 +8,7 @@ namespace gvsx {
 
 	namespace window {
 
-		struct sWindowDesc
+		struct sWindowDesc : public cObject
 		{
 			const char* Title = "Window";
 
@@ -22,7 +22,7 @@ namespace gvsx {
 			bool Fullscreen = false;
 		};
 
-		class ENGINE_API cWindowManager
+		class ENGINE_API cWindowManager : public cObject
 		{
 		public:
 			static void Init();

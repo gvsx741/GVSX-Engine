@@ -5,7 +5,7 @@ namespace gvsx {
 
 	namespace render
 	{
-		class ENGINE_API cShaderManager
+		class ENGINE_API cShaderManager : public cObject
 		{
 		public:
 			static sShaderStage* CreateStageFromFile(const char* filepath, eShaderStageType type);

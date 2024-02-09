@@ -6,13 +6,6 @@ namespace gvsx {
 
 	namespace render
 	{
-		struct sBlob
-		{
-			void* Instance = nullptr;
-			void* ByteCode = nullptr;
-			u32 ByteCodeSize = 0;
-		};
-
 		enum class eShaderStageType
 		{
 			NONE = -1,
@@ -20,6 +13,13 @@ namespace gvsx {
 			PIXEL = 1,
 			GEOMETRY = 2,
 			COMPUTE = 3,
+		};
+
+		struct sBlob : public cObject
+		{
+			void* Instance = nullptr;
+			void* ByteCode = nullptr;
+			u32 ByteCodeSize = 0;
 		};
 
 		struct ENGINE_API sShaderStage
