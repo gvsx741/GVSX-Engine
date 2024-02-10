@@ -8,7 +8,7 @@ namespace gvsx {
 	{
 		using namespace context;
 
-		std::unordered_map<const char*, sShaderStage*> cShaderManager::s_Stages = {};
+		unordered_map<const char*, sShaderStage*> cShaderManager::s_Stages = {};
 
 		sShaderStage* cShaderManager::CreateStageFromFile(const char* filepath, eShaderStageType type)
 		{
