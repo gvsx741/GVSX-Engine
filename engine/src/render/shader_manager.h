@@ -8,6 +8,9 @@ namespace gvsx {
 		class ENGINE_API cShaderManager : public cObject
 		{
 		public:
+			static void Init();
+			static void Reliase();
+
 			static sShaderStage* CreateStageFromFile(const char* filepath, eShaderStageType type);
 
 		private:
@@ -15,7 +18,7 @@ namespace gvsx {
 			static void CreateShaderStage(sShaderStage& stage);
 
 		private:
-			static unordered_map<const char*, sShaderStage*> s_Stages;
+			static unordered_map<const char*, sShaderStage>* s_Stages;
 		
 		};
 	}

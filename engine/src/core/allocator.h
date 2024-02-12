@@ -15,11 +15,11 @@ namespace gvsx {
             cAllocator() = default;
 
             template<class U>
-            constexpr cAllocator(const cAllocator<U>&) noexcept {}
+            cAllocator(const cAllocator<U>&) {}
 
             T* allocate(std::size_t size)
             {
-                return static_cast<T*>(cMemoryManager::s_Pools->Allocate(sizeof(T) * size));
+                return static_cast<T*>(cMemoryManager::s_Pools->Allocate((sizeof(T) * size)));
             }
 
             void deallocate(T* address, std::size_t size)

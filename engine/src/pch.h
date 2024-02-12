@@ -6,9 +6,9 @@
 
 // ENGINE
 #include <core/data_types.h>
-#include <core/stl.h>
 #include <core/object.h>
 #include <core/system.h>
+#include <core/stl.h>
 #include <core/logger.h>
 
 // NAMESPACE

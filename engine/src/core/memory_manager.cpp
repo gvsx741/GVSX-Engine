@@ -4,7 +4,7 @@ namespace gvsx {
 
 	namespace core {
 
-		cMemoryPoolStack* cMemoryManager::s_Pools = nullptr;
+		cMemoryPoolStack* cMemoryManager::s_Pools;
 
 		void cPool::Init(u64 byteSize, u64 allocs, u64 alignment)
 		{
@@ -17,7 +17,7 @@ namespace gvsx {
 
 			m_ByteSize = byteSize;
 			m_LastAddress = m_Memory;
-			m_MaxAddress = (void*)((u64)m_Memory + byteSize);
+			m_MaxAddress = (void*)((u64)m_Memory + ((u64)byteSize));
 			m_Allocs.reserve(allocs);
 			m_Alignment = alignment;
 		}
@@ -73,7 +73,7 @@ namespace gvsx {
 			m_Allocs.emplace_back(newAlloc);
 
 			// Update last address
-			m_LastAddress = (void*)(((u64)m_LastAddress) + size);
+			m_LastAddress = (void*)(((u64)m_LastAddress) + ((u64)size));
 
 			return newAlloc.Address;
 		}
@@ -105,6 +105,8 @@ namespace gvsx {
 				pool.Init(poolByteSize, poolAllocs, alignment);
 				Pools.emplace_back(pool);
 			}
+
+			TotalBytes = poolCount * poolByteSize;
 		}
 
 		cMemoryPoolStack::~cMemoryPoolStack()
