@@ -5,7 +5,7 @@ namespace gvsx {
 
 	namespace core {
 
-		struct sAllocation
+		struct ENGINE_API sAllocation
 		{
 			u8 FreeFlag = 0;
 

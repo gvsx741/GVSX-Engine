@@ -3,6 +3,8 @@
 #include <render/render_system.h>
 #include <window/window_manager.h>
 
+#include <render/core/shader.h>
+
 namespace gvsx {
 
 	namespace core {
@@ -31,6 +33,8 @@ namespace gvsx {
 		{
 			LogInfo("Application initialization");
 			
+			cMemoryManager::Init();
+
 			cWindowManager::Init();
 			cWindowManager::InitWindow(sWindowDesc());
 
@@ -44,6 +48,8 @@ namespace gvsx {
 			m_RenderSystem->Reliase();
 
 			cWindowManager::Reliase();
+
+			cMemoryManager::Reliase();
 
 			LogInfo("Application free");
 		}

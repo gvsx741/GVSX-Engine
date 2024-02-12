@@ -1,7 +1,5 @@
 #pragma once 
 
-#include <render/core/context.h>
-
 namespace gvsx {
 
 	namespace render
@@ -15,22 +13,21 @@ namespace gvsx {
 			COMPUTE = 3,
 		};
 
-		struct sBlob : public cObject
+		struct ENGINE_API sBlob : public cObject
 		{
 			void* Instance = nullptr;
 			void* ByteCode = nullptr;
 			u32 ByteCodeSize = 0;
 		};
 
-		struct ENGINE_API sShaderStage
+		struct ENGINE_API sShaderStage : public cObject
 		{
-			sShaderStage() = default;
 			sShaderStage(eShaderStageType type) : Type(type) {}
 
 			bool Compiled = false;
 			
-			std::string Profile;
-			std::string Source;
+			string Profile;
+			string Source;
 			
 			eShaderStageType Type;
 			sBlob Blob;

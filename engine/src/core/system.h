@@ -4,12 +4,12 @@ namespace gvsx {
 
 	namespace core {
 
-		class cSystem
+		class ENGINE_API cSystem
 		{
-		protected:
-			virtual void Init();
-			virtual void Reliase();
-			virtual void Update();
+		public:
+			virtual void Init() {};
+			virtual void Reliase() {};
+			virtual void Update() {};
 		};
 	}
 }
