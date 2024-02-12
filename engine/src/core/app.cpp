@@ -7,6 +7,8 @@
 
 #include <render/core/shader.h>
 
+#include <render/core/shader.h>
+
 namespace gvsx {
 
 	namespace core {
@@ -51,6 +53,8 @@ namespace gvsx {
 
 			cShaderManager::Reliase();
 			cWindowManager::Reliase();
+			cMemoryManager::Reliase();
+
 			cMemoryManager::Reliase();
 
 			LogInfo("Application free");
