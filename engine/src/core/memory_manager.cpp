@@ -156,11 +156,15 @@ namespace gvsx {
 		{
 			u64 memorySize = MEMORY_GB;
 			s_Pools = new cMemoryPoolStack(1, memorySize, 1000, 0);
+
+			LogInfo("cMemoryManager initialized");
 		}
 
 		void cMemoryManager::Reliase()
 		{
 			delete s_Pools;
+
+			LogInfo("cMemoryManager released");
 		}
 	}
 }

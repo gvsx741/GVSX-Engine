@@ -14,12 +14,12 @@ namespace gvsx {
 		class ENGINE_API cApp
 		{
 		public:
+			cApp();
+			~cApp();
+
 			void Run();
 
-		protected:
-			void Init();
-			void Reliase();
-
+		private:
 			cRenderSystem* m_RenderSystem = nullptr;
 		};
 	}

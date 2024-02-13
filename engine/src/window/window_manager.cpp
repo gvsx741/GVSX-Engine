@@ -15,11 +15,14 @@ namespace gvsx {
 			}
 
 			s_MainMonitor = glfwGetPrimaryMonitor();
+
+			LogInfo("cWindowManager initialized");
 		}
 
 		void cWindowManager::Reliase()
 		{
 			glfwTerminate();
+			LogInfo("cWindowManager is reliased");
 		}
 
 		void cWindowManager::InitWindow(sWindowDesc desc)

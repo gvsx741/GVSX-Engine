@@ -12,23 +12,22 @@ namespace gvsx {
 
 		void cShaderManager::Init()
 		{
-			LogInfo("cShaderManager::Init()");
 			s_Stages = new unordered_map<const char*, sShaderStage>();
+
+			LogInfo("cShaderManager initialized");
 		}
 
 		void cShaderManager::Reliase()
 		{
-			for (auto& shader : *s_Stages) {
-				//delete shader stage
-			}
+			delete s_Stages;
 
-			LogInfo("cShaderManager::Reliase()");
+			LogInfo("cShaderManager is released");
 		}
 
 		sShaderStage* cShaderManager::CreateStageFromFile(const char* filepath, eShaderStageType type)
 		{
 			if(s_Stages->find(filepath) != s_Stages->end()) {
-				return nullptr;// s_Stages->at(filepath);
+				return &s_Stages->at(filepath);
 			}
 
 			sShaderStage* stage = new sShaderStage(type);

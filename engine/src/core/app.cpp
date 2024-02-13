@@ -16,10 +16,37 @@ namespace gvsx {
 		using namespace window;
 		using namespace render;
 
+		cApp::cApp()
+		{
+			LogInfo("Application initialization");
+
+			cMemoryManager::Init();
+			cWindowManager::Init();
+			cWindowManager::InitWindow(sWindowDesc());
+			cShaderManager::Init();
+
+			m_RenderSystem->Init();
+
+			LogInfo("Application initialized");
+		}
+
+		cApp::~cApp()
+		{
+			LogInfo("Application releasing");
+
+			m_RenderSystem->Reliase();
+
+			cShaderManager::Reliase();
+			cWindowManager::Reliase();
+			cMemoryManager::Reliase();
+
+			cMemoryManager::Reliase();
+
+			LogInfo("Application is released");
+		}
+
 		void cApp::Run()
 		{
-			Init();
-
 			m_RenderSystem = new cRenderSystem();
 
 			while(!cWindowManager::isClosed())
@@ -29,35 +56,6 @@ namespace gvsx {
 				//cWindowManager::SwapBuffers();
 				cWindowManager::CheckEvents();
 			}
-
-			Reliase();
-		}
-
-		void cApp::Init()
-		{
-			LogInfo("Application initialization");
-			
-			cMemoryManager::Init();
-			cWindowManager::Init();
-			cWindowManager::InitWindow(sWindowDesc());
-			cShaderManager::Init();
-
-			m_RenderSystem->Init();	
-
-			LogInfo("Application initialized");
-		}
-
-		void cApp::Reliase()
-		{
-			m_RenderSystem->Reliase();
-
-			cShaderManager::Reliase();
-			cWindowManager::Reliase();
-			cMemoryManager::Reliase();
-
-			cMemoryManager::Reliase();
-
-			LogInfo("Application free");
 		}
 	}
 }
