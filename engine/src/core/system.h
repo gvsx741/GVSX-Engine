@@ -4,11 +4,9 @@ namespace gvsx {
 
 	namespace core {
 
-		class ENGINE_API cSystem
+		class ENGINE_API cSystem : public cObject
 		{
 		public:
-			virtual void Init() {};
-			virtual void Reliase() {};
 			virtual void Update() {};
 		};
 	}
