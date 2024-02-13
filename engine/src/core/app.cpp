@@ -19,13 +19,13 @@ namespace gvsx {
 		cApp::cApp()
 		{
 			LogInfo("Application initialization");
-
+			
 			cMemoryManager::Init();
 			cWindowManager::Init();
 			cWindowManager::InitWindow(sWindowDesc());
 			cShaderManager::Init();
 
-			m_RenderSystem->Init();
+			m_RenderSystem = new cRenderSystem();
 
 			LogInfo("Application initialized");
 		}
@@ -33,22 +33,19 @@ namespace gvsx {
 		cApp::~cApp()
 		{
 			LogInfo("Application releasing");
-
-			m_RenderSystem->Release();
+			
+			delete m_RenderSystem;
 
 			cShaderManager::Release();
+			cWindowManager::ReleaseWindow();
 			cWindowManager::Release();
 			cMemoryManager::Release();
 
-			cMemoryManager::Release();
-
-			LogInfo("Application is released");
+			LogInfo("Application released");
 		}
 
 		void cApp::Run()
 		{
-			m_RenderSystem = new cRenderSystem();
-
 			while(!cWindowManager::isClosed())
 			{
 				m_RenderSystem->Update();

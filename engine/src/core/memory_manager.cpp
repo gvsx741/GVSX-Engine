@@ -164,7 +164,7 @@ namespace gvsx {
 		{
 			delete s_Pools;
 
-			LogInfo("cMemoryManager is released");
+			LogInfo("cMemoryManager released");
 		}
 	}
 }

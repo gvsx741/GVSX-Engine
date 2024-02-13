@@ -21,7 +21,7 @@ namespace gvsx {
 		{
 			delete s_Stages;
 
-			LogInfo("cShaderManager is released");
+			LogInfo("cShaderManager released");
 		}
 
 		sShaderStage* cShaderManager::CreateStageFromFile(const char* filepath, eShaderStageType type)

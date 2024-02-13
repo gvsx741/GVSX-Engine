@@ -10,18 +10,28 @@ namespace gvsx {
 
 		using namespace context;
 
-		void cRenderSystem::Init()
+		cRenderSystem::cRenderSystem()
 		{
 			InitDX11();
 
 			LogInfo("Render system initialized");
 		}
 
-		void cRenderSystem::Release()
+		cRenderSystem::~cRenderSystem()
 		{
 			ReleaseDX11();
 
-			LogInfo("Render system is released");
+			LogInfo("Render system released");
+		}
+
+		void cRenderSystem::Init()
+		{
+
+		}
+
+		void cRenderSystem::Release()
+		{
+
 		}
 
 		void cRenderSystem::Update()

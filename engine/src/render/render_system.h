@@ -7,6 +7,9 @@ namespace gvsx {
 		class ENGINE_API cRenderSystem : public cSystem
 		{
 		public:
+			cRenderSystem();
+			~cRenderSystem();
+
 			void Init();
 			void Release();
 			
