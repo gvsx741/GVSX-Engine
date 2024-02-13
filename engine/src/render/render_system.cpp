@@ -17,9 +17,9 @@ namespace gvsx {
 			LogInfo("Render system initialized");
 		}
 
-		void cRenderSystem::Reliase()
+		void cRenderSystem::Release()
 		{
-			ReliaseDX11();
+			ReleaseDX11();
 
 			LogInfo("Render system is released");
 		}

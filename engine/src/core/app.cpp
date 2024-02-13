@@ -34,13 +34,13 @@ namespace gvsx {
 		{
 			LogInfo("Application releasing");
 
-			m_RenderSystem->Reliase();
+			m_RenderSystem->Release();
 
-			cShaderManager::Reliase();
-			cWindowManager::Reliase();
-			cMemoryManager::Reliase();
+			cShaderManager::Release();
+			cWindowManager::Release();
+			cMemoryManager::Release();
 
-			cMemoryManager::Reliase();
+			cMemoryManager::Release();
 
 			LogInfo("Application is released");
 		}

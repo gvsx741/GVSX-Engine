@@ -9,17 +9,15 @@ namespace gvsx {
 		{
 		public:
 			static void Init();
-			static void Reliase();
+			static void Release();
 
 			static sShaderStage* CreateStageFromFile(const char* filepath, eShaderStageType type);
 
 		private:
-			static void CompileShaderStage(sShaderStage& stage);
-			static void CreateShaderStage(sShaderStage& stage);
+			static void CompileShaderStage(sShaderStage* stage);
+			static void CreateShaderStage(sShaderStage* stage);
 
-		private:
 			static unordered_map<const char*, sShaderStage>* s_Stages;
-		
 		};
 	}
 }

@@ -8,7 +8,7 @@ namespace gvsx {
 		{
 		public:
 			void Init();
-			void Reliase();
+			void Release();
 			
 			void Update();
 		};

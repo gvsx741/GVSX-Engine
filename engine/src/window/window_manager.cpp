@@ -19,10 +19,10 @@ namespace gvsx {
 			LogInfo("cWindowManager initialized");
 		}
 
-		void cWindowManager::Reliase()
+		void cWindowManager::Release()
 		{
 			glfwTerminate();
-			LogInfo("cWindowManager is reliased");
+			LogInfo("cWindowManager is released");
 		}
 
 		void cWindowManager::InitWindow(sWindowDesc desc)
@@ -39,7 +39,7 @@ namespace gvsx {
 			glfwMakeContextCurrent(s_Window);
 		}
 
-		void cWindowManager::ReliaseWindow()
+		void cWindowManager::ReleaseWindow()
 		{
 			if (s_Window != nullptr) {
 				glfwDestroyWindow(s_Window);

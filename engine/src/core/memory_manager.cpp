@@ -160,11 +160,11 @@ namespace gvsx {
 			LogInfo("cMemoryManager initialized");
 		}
 
-		void cMemoryManager::Reliase()
+		void cMemoryManager::Release()
 		{
 			delete s_Pools;
 
-			LogInfo("cMemoryManager released");
+			LogInfo("cMemoryManager is released");
 		}
 	}
 }

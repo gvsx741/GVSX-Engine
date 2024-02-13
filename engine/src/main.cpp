@@ -5,4 +5,6 @@ void main()
 	cApp* app = new cApp();
 
 	app->Run();
+
+	delete app;
 }

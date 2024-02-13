@@ -17,7 +17,7 @@ namespace gvsx {
 			LogInfo("cShaderManager initialized");
 		}
 
-		void cShaderManager::Reliase()
+		void cShaderManager::Release()
 		{
 			delete s_Stages;
 
@@ -30,28 +30,31 @@ namespace gvsx {
 				return &s_Stages->at(filepath);
 			}
 
-			sShaderStage* stage = new sShaderStage(type);
+			sShaderStage* stage = &s_Stages->emplace(std::make_pair(filepath, sShaderStage(type))).first->second;
+
+			CompileShaderStage(stage);
+			CreateShaderStage(stage);
 
 			return stage;
 		}
 
-		void cShaderManager::CompileShaderStage(sShaderStage& stage)
+		void cShaderManager::CompileShaderStage(sShaderStage* stage)
 		{
-			if (stage.Compiled) {
+			if (stage->Compiled) {
 				return;
 			}
 
 			ID3DBlob* shaderBlob = nullptr;
 			ID3DBlob* errorBlob = nullptr;
 
-			switch (stage.Type)
+			switch (stage->Type)
 			{
 			case eShaderStageType::VERTEX:
-				D3DCompile(stage.Source.c_str(), stage.Source.length(), 0, 0, 0, "vs_main", stage.Profile.c_str(), 0, 0, &shaderBlob, &errorBlob);
+				D3DCompile(stage->Source.c_str(), stage->Source.length(), 0, 0, 0, "vs_main", stage->Profile.c_str(), 0, 0, &shaderBlob, &errorBlob);
 				break;
 
 			case eShaderStageType::PIXEL:
-				D3DCompile(stage.Source.c_str(), stage.Source.length(), 0, 0, 0, "ps_main", stage.Profile.c_str(), 0, 0, &shaderBlob, &errorBlob);
+				D3DCompile(stage->Source.c_str(), stage->Source.length(), 0, 0, 0, "ps_main", stage->Profile.c_str(), 0, 0, &shaderBlob, &errorBlob);
 				break;
 
 			default:
@@ -60,20 +63,20 @@ namespace gvsx {
 			}
 
 			if (shaderBlob != nullptr) {
-				stage.Compiled = true;
-				stage.Blob.Instance= shaderBlob;
-				stage.Blob.ByteCode = shaderBlob->GetBufferPointer();
-				stage.Blob.ByteCodeSize = shaderBlob->GetBufferSize();
+				stage->Compiled = true;
+				stage->Blob.Instance= shaderBlob;
+				stage->Blob.ByteCode = shaderBlob->GetBufferPointer();
+				stage->Blob.ByteCodeSize = shaderBlob->GetBufferSize();
 			}
 		}
 
-		void cShaderManager::CreateShaderStage(sShaderStage& stage)
+		void cShaderManager::CreateShaderStage(sShaderStage* stage)
 		{
-			sBlob blob = stage.Blob;
+			sBlob blob = stage->Blob;
 
 			if (blob.Instance != nullptr) {
 
-				switch (stage.Type) {
+				switch (stage->Type) {
 
 				case eShaderStageType::VERTEX:
 					Device->CreateVertexShader(
@@ -95,6 +98,5 @@ namespace gvsx {
 				}
 			}
 		}
-
 	}
 }

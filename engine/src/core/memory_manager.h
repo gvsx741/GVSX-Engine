@@ -65,7 +65,7 @@ namespace gvsx {
 			static cMemoryPoolStack* s_Pools;
 
 			static void Init();
-			static void Reliase();
+			static void Release();
 		};
 	}
 }
