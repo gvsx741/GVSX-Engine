@@ -30,6 +30,7 @@ namespace gvsx {
 			LogInfo("Application releasing");
 			
 			delete m_RenderSystem;
+			m_RenderSystem = nullptr;
 
 			cShaderManager::Release();
 			cWindowManager::ReleaseWindow();

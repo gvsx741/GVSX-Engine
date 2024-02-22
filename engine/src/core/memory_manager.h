@@ -59,13 +59,25 @@ namespace gvsx {
 			bool Deallocate(void* address);
 		};
 
-		class ENGINE_API cMemoryManager
+		class ENGINE_API cMemoryManager 
 		{
 		public:
-			static cMemoryPoolStack* s_Pools;
+			cMemoryManager() {
+				Init();
+			}
+			~cMemoryManager() {
+				Release();
+			}
 
 			static void Init();
 			static void Release();
+		private:
+
+			static cMemoryPoolStack* s_Pools;
+
+			template<typename T>
+			friend class cAllocator;
+			friend class cObject;
 		};
 	}
 }

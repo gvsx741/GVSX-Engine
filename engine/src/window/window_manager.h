@@ -15,6 +15,8 @@ namespace gvsx {
 				: Title(title), TopLeftX(topLeftX), TopLeftY(topLeftY), Width(width), Height(height), Fullscreen(fullscreen) {
 			}
 
+			string name = "window";
+
 			const char* Title = "Window";
 
 			s32 TopLeftX = 0;
