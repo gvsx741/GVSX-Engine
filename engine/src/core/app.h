@@ -11,7 +11,7 @@ namespace gvsx {
 
 		using namespace render;
 
-		class ENGINE_API cApp
+		class ENGINE_API cApp : public cObject
 		{
 		public:
 			cApp();

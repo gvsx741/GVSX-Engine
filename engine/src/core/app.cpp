@@ -5,10 +5,6 @@
 
 #include <render/render_system.h>
 
-#include <render/core/shader.h>
-
-#include <render/core/shader.h>
-
 namespace gvsx {
 
 	namespace core {
@@ -20,7 +16,6 @@ namespace gvsx {
 		{
 			LogInfo("Application initialization");
 			
-			cMemoryManager::Init();
 			cWindowManager::Init();
 			cWindowManager::InitWindow(sWindowDesc());
 			cShaderManager::Init();
@@ -39,7 +34,6 @@ namespace gvsx {
 			cShaderManager::Release();
 			cWindowManager::ReleaseWindow();
 			cWindowManager::Release();
-			cMemoryManager::Release();
 
 			LogInfo("Application released");
 		}

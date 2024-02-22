@@ -4,7 +4,7 @@ namespace gvsx {
 
 	namespace core {
 
-		cMemoryPoolStack* cMemoryManager::s_Pools;
+		cMemoryPoolStack* cMemoryManager::s_Pools = new cMemoryPoolStack(1, MEMORY_GB, 1000, 0);
 
 		void cPool::Init(u64 byteSize, u64 allocs, u64 alignment)
 		{
@@ -144,19 +144,16 @@ namespace gvsx {
 
 		bool cMemoryPoolStack::Deallocate(void* address)
 		{
+            // todo: Here is a bug
 			for (auto& pool : Pools) {
-				// todo: Need to fix this
-				if (pool.Deallocate(address)) {
-					return true;
-				}
+                pool.Deallocate(address);
 			}
+
+            return true;
 		}
 
 		void cMemoryManager::Init()
 		{
-			u64 memorySize = MEMORY_GB;
-			s_Pools = new cMemoryPoolStack(1, memorySize, 1000, 0);
-
 			LogInfo("cMemoryManager initialized");
 		}
 

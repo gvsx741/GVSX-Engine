@@ -11,8 +11,8 @@ namespace gvsx {
 
 	namespace core {
 
-		using string = std::basic_string<char, std::char_traits<char>, cAllocator<char>>;
-		
+		typedef std::basic_string<char, std::char_traits<char>, cAllocator<char>> string;
+
 		template<typename T>
 		using vector = std::vector<T, cAllocator<T>>;
 

@@ -25,13 +25,13 @@ namespace gvsx {
 			bool Deallocate(void* address);
 
 		private:
-			void* m_Memory;
-			void* m_LastAddress;
-			void* m_MaxAddress;
+			void* m_Memory = nullptr;
+			void* m_LastAddress = nullptr;
+			void* m_MaxAddress = nullptr;
 
 			std::vector<sAllocation> m_Allocs;
 
-			u64 m_ByteSize; 
+			u64 m_ByteSize = 0; 
 			u64 m_BytesUsed = 0;
 
 			u64 m_Alignment = 0;

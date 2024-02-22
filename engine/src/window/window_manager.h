@@ -8,15 +8,20 @@ namespace gvsx {
 
 	namespace window {
 
-		struct sWindowDesc : public cObject
+		struct ENGINE_API sWindowDesc : public cObject
 		{
+			sWindowDesc() {}
+			sWindowDesc(const char* title, s32 topLeftX, s32 topLeftY, s32 width, s32 height, bool fullscreen)
+				: Title(title), TopLeftX(topLeftX), TopLeftY(topLeftY), Width(width), Height(height), Fullscreen(fullscreen) {
+			}
+
 			const char* Title = "Window";
 
-			int TopLeftX = 0;
-			int TopLeftY = 0;
+			s32 TopLeftX = 0;
+			s32 TopLeftY = 0;
 
-			int Width = 640;
-			int Height = 640;
+			s32 Width = 640;
+			s32 Height = 640;
 
 			//bool VSync = false;
 			bool Fullscreen = false;
