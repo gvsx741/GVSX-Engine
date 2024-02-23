@@ -1,5 +1,7 @@
 #include <input/keyboard_input.h>
 
+#include <window/window_manager.h>
+
 namespace gvsx {
 
 	namespace input {
@@ -22,6 +24,10 @@ namespace gvsx {
 					else { glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); }
 
 					left_alt = !left_alt;
+				}
+
+				if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+					glfwSetWindowShouldClose(window, GL_TRUE);
 				}
 			}
 		}
