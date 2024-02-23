@@ -1,8 +1,12 @@
 #include <window/window_manager.h>
 
+#include <input/keyboard_input.h>
+
 namespace gvsx {
 
 	namespace window {
+
+		using namespace input;
 
 		GLFWmonitor* cWindowManager::s_MainMonitor = nullptr;
 		GLFWwindow* cWindowManager::s_Window = nullptr;
@@ -29,7 +33,7 @@ namespace gvsx {
 		{
 			s_WindowDesc = desc;
 
-			s_Window = glfwCreateWindow(desc.Width, desc.Height, desc.Title, NULL, NULL);
+			s_Window = glfwCreateWindow(desc.Width, desc.Height, desc.Title.c_str(), NULL, NULL);
 
 			if (!s_Window)
 			{
@@ -37,6 +41,8 @@ namespace gvsx {
 			}
 
 			glfwMakeContextCurrent(s_Window);
+
+			glfwSetKeyCallback(s_Window, KeyCallback);
 
 			LogInfo("Main window initialized");
 		}
