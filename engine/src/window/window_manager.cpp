@@ -1,5 +1,6 @@
 #include <window/window_manager.h>
 
+#include <input/mouse_input.h>
 #include <input/keyboard_input.h>
 
 namespace gvsx {
@@ -43,6 +44,7 @@ namespace gvsx {
 			glfwMakeContextCurrent(s_Window);
 
 			glfwSetKeyCallback(s_Window, KeyCallback);
+			glfwSetCursorPosCallback(s_Window, CursorPositionCallback);
 
 			LogInfo("Main window initialized");
 		}

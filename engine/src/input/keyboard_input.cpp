@@ -4,6 +4,8 @@ namespace gvsx {
 
 	namespace input {
 
+		bool left_alt = true;
+
 		void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
 			if (action == GLFW_PRESS || action == GLFW_REPEAT) {
@@ -12,6 +14,14 @@ namespace gvsx {
 				{
 					LogInfo("A");
 					LogInfo("D");
+				}
+
+				if (glfwGetKey(window, GLFW_KEY_LEFT_ALT) == GLFW_PRESS)
+				{
+					if(left_alt) { glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); }
+					else { glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); }
+
+					left_alt = !left_alt;
 				}
 			}
 		}

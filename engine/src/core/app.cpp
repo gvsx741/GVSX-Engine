@@ -42,6 +42,7 @@ namespace gvsx {
 		{
 			while(!cWindowManager::isClosed())
 			{
+
 				glfwPollEvents();
 
 				m_RenderSystem->Update();
