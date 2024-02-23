@@ -11,13 +11,11 @@ namespace gvsx {
 		struct ENGINE_API sWindowDesc : public cObject
 		{
 			sWindowDesc() {}
-			sWindowDesc(const char* title, s32 topLeftX, s32 topLeftY, s32 width, s32 height, bool fullscreen)
+			sWindowDesc(string title, s32 topLeftX, s32 topLeftY, s32 width, s32 height, bool fullscreen)
 				: Title(title), TopLeftX(topLeftX), TopLeftY(topLeftY), Width(width), Height(height), Fullscreen(fullscreen) {
 			}
 
-			string name = "window";
-
-			const char* Title = "Window";
+			string Title = "Window";
 
 			s32 TopLeftX = 0;
 			s32 TopLeftY = 0;
